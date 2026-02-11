@@ -1,0 +1,42 @@
+---
+title: "STA380 Project Proposal"
+subtitle: "Bootstrap Estimation of Healthcare Data"
+author: "Group 11"
+date: "2026-02-10"
+output:
+  pdf_document:
+    latex_engine: xelatex
+fontsize: 11pt
+geometry: margin=1in
+bibliography: bibliography.bib
+header-includes:
+  - \usepackage{xcolor}
+---
+
+
+# 1. Project Topic
+
+Bootstrap Estimation of Sleep Duration Differences by Depression Status[@marqueze2015natural]
+
+# 2. Simulation vs. Dataset
+
+The project will use a healthcare dataset.
+
+# 3. Project Details
+
+We will use bootstrap resampling method to estimate the sampling distribution of sleep duration statistics in a healthcare dataset.
+
+The study will focus on comparing sleep duration between individuals with depression and those without depression. We will apply bootstrap resampling with replacement within each group seperately to estimate uncertainty in summary statistics.
+
+The following outputs will be provided:
+
+- Boostrap sampling distribution of mean sleep duration
+- Boostrap sampling distribution of median sleep duration
+- Bootstrap confidence intervals for both mean and median
+- Visualizations of bootstrap distribution using histograms
+
+# 4. User Inputs (Shiny Components)
+
+# References
+\nocite{*}
+
