@@ -355,7 +355,8 @@ mc_knn_curve_components <- function(k_values,
 #' @return ggplot object.
 #' @export
 plot_curve_components <- function(curve_df,
-                                  show = c("avg_bias2", "avg_variance", "avg_mse_y")) {
+                                  show = c("avg_bias2", "avg_variance", "avg_mse_y"),
+                                  colors = NULL) {
   
   needed <- c("k", show)
   if (!all(needed %in% names(curve_df))) {
@@ -371,27 +372,32 @@ plot_curve_components <- function(curve_df,
     values_to = "value"
   )
   
-  ggplot2::ggplot(df_long,
-                  ggplot2::aes(x = .data$k,
-                               y = .data$value,
-                               color = .data$component,
-                               shape = .data$component)) +
+  p <- ggplot2::ggplot(
+    df_long,
+    ggplot2::aes(
+      x = .data$k,
+      y = .data$value,
+      color = .data$component,
+      shape = .data$component
+    )
+  ) +
     ggplot2::geom_line(linewidth = 1) +
     ggplot2::geom_point(size = 2.5) +
-    ggplot2::scale_shape_manual(values = c(
-      "avg_bias2" = 16,
-      "avg_variance" = 15,
-      "avg_mse_y" = 17
-    )) +
     ggplot2::theme_minimal(base_size = 14) +
     ggplot2::labs(
-      title = "Bias-variance tradeoff across k (averaged over x)",
+      title = "Bias-variance tradeoff across k",
       x = "k",
-      y = "Average over x",
+      y = "Average over grid",
       color = "Component",
       shape = "Component"
     ) +
     ggplot2::theme(legend.position = "top")
+  
+  if (!is.null(colors)) {
+    p <- p + ggplot2::scale_color_manual(values = colors)
+  }
+  
+  p
 }
 
 

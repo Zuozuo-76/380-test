@@ -1,6 +1,7 @@
 library(shiny)
 library(ggplot2)
 library(tidyr)
+library(rlang)
 
 source("function.R")
 
