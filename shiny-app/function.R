@@ -571,11 +571,16 @@ plot_fit_vs_truth_2d <- function(res) {
     labels = c("True surface", "Estimated surface")
   )
   
-  ggplot2::ggplot(long_df, ggplot2::aes(x = .data$x1, y = .data$x2, fill = .data$value)) +
+  ggplot2::ggplot(long_df, ggplot2::aes(x = x1, y = x2, fill = value)) +
     ggplot2::geom_raster() +
     ggplot2::coord_fixed() +
     ggplot2::facet_wrap(~ surface) +
-    ggplot2::scale_fill_gradient2(low = "navy", mid = "white", high = "firebrick", midpoint = 0) +
+    ggplot2::scale_fill_gradient2(
+      low = "navy",
+      mid = "white",
+      high = "firebrick",
+      midpoint = 0
+    ) +
     ggplot2::theme_minimal(base_size = 14) +
     ggplot2::labs(
       title = "True surface vs estimated surface",
@@ -593,15 +598,9 @@ plot_mse_surface_2d <- function(res, component = c("bias2", "variance", "mse_y")
   if (res$settings$d != 2) stop("plot_mse_surface_2d() requires d = 2.")
   
   pw <- res$pointwise
+  pw$z <- pw[[component]]
   
-  ggplot2::ggplot(
-    pw,
-    ggplot2::aes(
-      x = .data$x1,
-      y = .data$x2,
-      fill = .data[[component]]
-    )
-  ) +
+  ggplot2::ggplot(pw, ggplot2::aes(x = x1, y = x2, fill = z)) +
     ggplot2::geom_raster() +
     ggplot2::coord_fixed() +
     ggplot2::scale_fill_gradient(low = "white", high = "firebrick") +
