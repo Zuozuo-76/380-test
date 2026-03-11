@@ -2,7 +2,7 @@ library(shiny)
 library(ggplot2)
 library(tidyr)
 
-source("../R/function.R")
+source("function.R")
 
 ui <- fluidPage(
   titlePanel("Monte Carlo Study of the Bias-Variance Tradeoff in k-NN"),
